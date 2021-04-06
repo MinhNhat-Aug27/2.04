@@ -5,6 +5,10 @@ using namespace std;
 
 bool Xcheck(string X);	//kiem tra neu hop le tra ve 1
 
+float toDec(string X);
+
+string decToBase(string X, int base);
+
 string singleP(string X);	//bieu dien cham dong chinh xac don (tra ve he so 16)
 
 string doubleP(string X);	//bieu dien cham dong chinh xac kep (tra ve he so 16)
