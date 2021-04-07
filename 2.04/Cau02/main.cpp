@@ -22,7 +22,7 @@ void main()
 		cout << "Dien so bit N: ";
 		cin >> N;
 
-		while (!Ncheck(N))
+		while (!Ncheck(X, N))
 		{
 			cout << "N khong hop le, vui long dien lai: ";
 			cin >> N;
