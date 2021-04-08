@@ -99,7 +99,7 @@ string DecimalToBase(unsigned long long int lli, int base)
 	return res;
 }
 
-string Precision(string x)
+string Precision(string x, bool isSingle)
 //input : 1 so thuc can chuyen qua dau cham dong chinh xac kep
 //output : dang chinh xac kep tuong ung 
 {
