@@ -99,58 +99,7 @@ string DecimalToBase(unsigned long long int lli, int base)
 	return res;
 }
 
-string singleP(string x)
-//input : 1 so thuc can chuyen qua dau cham dong chinh xac don
-//output : dang chinh xac don tuong ung
-{
-	string kq = "";
-	int bitCount = 1;
-	int start = 0;
-	if (x[0] == '-')
-	{
-		kq = '1' + kq;
-		start = 1;
-	}
-	else {
-		kq = '0' + kq;
-	}
-
-	int dot_pos = 0;
-	for (dot_pos; dot_pos < x.length(); dot_pos++) 
-	{
-		if (x[dot_pos] == '.')
-			break;
-	}
-
-	string x_nguyen = "";
-	for (int i = start; i < dot_pos; i++)
-	{
-		x_nguyen = x_nguyen + x[i];
-	}
-	string x_nguyen_bin = toBin(x_nguyen);
-	bitCount += x_nguyen_bin.length();
-
-	float x_abs = toDec(x, 10);
-	int bit_rem = 24 - bitCount+1;
-	long long int temp = round(x_abs * pow(2, bit_rem));
-	string temp_str_bin = toBin(to_string(temp));
-	int exponent = 23 - bit_rem + 127;
-	string e_str = "";
-	while (exponent != 0)
-	{
-		e_str = getChar(exponent % 10) + e_str;
-		exponent /= 10;
-	}
-	string e_str_bin = toBin(e_str);
-	kq = kq + e_str_bin;
-	for (int j = 1; j < temp_str_bin.length(); j++)
-	{
-		kq = kq + temp_str_bin[j];
-	}
-	return DecimalToBase(binToDec(kq), 16);
-}
-
-string doubleP(string x)
+string Precision(string x)
 //input : 1 so thuc can chuyen qua dau cham dong chinh xac kep
 //output : dang chinh xac kep tuong ung 
 {
@@ -182,10 +131,18 @@ string doubleP(string x)
 	bitCount += x_nguyen_bin.length();
 	
 	float x_abs = toDec(x, 10);
-	int bit_rem = 53 - bitCount + 1;
+	int bit_rem, exponent;
+	if(isSingle == true)
+	{
+	    bit_rem = 24 - bitCount + 1 ;
+	    exponent = 23 - bit_rem + 127;
+	}
+	else {
+	    bit_rem = 53 - bitCount +1;
+	    exponent = 52 - bit_rem + 1023 ;
+	}
 	long long int temp = round(x_abs * pow(2, bit_rem));
 	string temp_str_bin = toBin(to_string(temp));
-	int exponent = 52 - bit_rem +1023;
 	string e_str = "";
 	while (exponent != 0)
 	{
